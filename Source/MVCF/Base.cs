@@ -19,7 +19,8 @@ namespace MVCF
             "[RWY]Dragon's Descent: Void Dwellers",
             "Genetic Rim",
             "Cybernetic Warfare and Special Weapons (Continued)",
-            "Cybernetic Warfare and Special Weapons"
+            "Cybernetic Warfare and Special Weapons",
+            "Adeptus Mechanicus: Armoury"
         };
 
         public Base(ModContentPack content) : base(content)
