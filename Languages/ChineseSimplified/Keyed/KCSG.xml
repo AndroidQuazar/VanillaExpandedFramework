@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <KCSG.Add>添加</KCSG.Add>
+  <KCSG.Remove>移除</KCSG.Remove>
+  <KCSG.SpawnNearCenter>在中心附近生成</KCSG.SpawnNearCenter>
+  <KCSG.AllowFoggedPosition>允许未发现区域</KCSG.AllowFoggedPosition>
+  <KCSG.SpawnPartOfEnnemyFaction>生成一部分敌方派系</KCSG.SpawnPartOfEnnemyFaction>
+</LanguageData>

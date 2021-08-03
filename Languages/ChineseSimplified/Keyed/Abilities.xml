@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <VFEA.AbilityDisableReasonCooldown>{0}处于{1}的冷却期</VFEA.AbilityDisableReasonCooldown>
+  <VFEA.AbilityDisableReasonGeneral>{0}不符合要求</VFEA.AbilityDisableReasonGeneral>
+  <VFEA.AbilityStatsPower>威力</VFEA.AbilityStatsPower>
+  <VFEA.AbilityStatsDuration>间隔</VFEA.AbilityStatsDuration>
+</LanguageData>

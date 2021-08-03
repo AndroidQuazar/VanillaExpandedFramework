@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <CSGTitle>自定义结构生成：</CSGTitle>
+  <CSGLog>启用生成结构调试日志：</CSGLog>
+  <TPTitle>可开关补丁：</TPTitle>
+  <NeedRestart>&lt;b&gt;&lt;color=red&gt;所有设置都需要重新启动才能应用&lt;/color&gt;&lt;/b&gt;</NeedRestart>
+  <XPatchFound>找到 {0} 个补丁</XPatchFound>
+  <FDTitle>派系侦测</FDTitle>
+  <NeedToBeInGame>你首先需要加载一个保存</NeedToBeInGame>
+  <AskForPopUp>添加派系</AskForPopUp>
+  <AskForPopUpExplained>单击此选项以查询每个你希望添加到游戏中的派系</AskForPopUpExplained>
+  <CanAddXFaction>{0}个派系可以添加到您当前的存档中</CanAddXFaction>
+</LanguageData>

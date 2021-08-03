@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <VanillaFactionsExpanded.EquipShield>将{0}当作盾牌装备</VanillaFactionsExpanded.EquipShield>
+  <VanillaFactionsExpanded.EquipWarningShieldUnusable>（{0}不可用作盾牌）</VanillaFactionsExpanded.EquipWarningShieldUnusable>
+  <VanillaFactionsExpanded.EquipWarningShieldUnusableWithWeapon>（{0}将不可作为盾牌使用）</VanillaFactionsExpanded.EquipWarningShieldUnusableWithWeapon>
+  <VanillaFactionsExpanded.Protects>防护</VanillaFactionsExpanded.Protects>
+  <VanillaFactionsExpanded.Protects_Desc>盾牌能对哪些身体部位起到防护作用。</VanillaFactionsExpanded.Protects_Desc>
+  <VanillaFactionsExpanded.ScenPart_ForcedFactionRelations>派系关系修正</VanillaFactionsExpanded.ScenPart_ForcedFactionRelations>
+  <VanillaFactionsExpanded.NumberRange>{0}至{1}</VanillaFactionsExpanded.NumberRange>
+  <VanillaFactionsExpanded.AllFactions>所有派系</VanillaFactionsExpanded.AllFactions>
+  <VanillaFactionsExpanded.AllFactionsIncludingHidden>所有派系（包括隐藏派系）</VanillaFactionsExpanded.AllFactionsIncludingHidden>
+  <VanillaFactionsExpanded.AlwaysHostile>永久敌对</VanillaFactionsExpanded.AlwaysHostile>
+  <VanillaFactionsExpanded.AffectHiddenFactions>隐藏影响</VanillaFactionsExpanded.AffectHiddenFactions>
+  <VanillaFactionsExpanded.StartingGoodwill>启用</VanillaFactionsExpanded.StartingGoodwill>
+  <VanillaFactionsExpanded.NaturalGoodwill>顺其自然</VanillaFactionsExpanded.NaturalGoodwill>
+  <VanillaFactionsExpanded.UsableWithShield>可与盾牌一同装备</VanillaFactionsExpanded.UsableWithShield>
+  <VanillaFactionsExpanded.UsableWithShield_Desc>在角色装备盾牌时，该武器是否可以使用。</VanillaFactionsExpanded.UsableWithShield_Desc>
+  <VanillaFactionsExpanded.FactionTitle>新派系：{FactionName}</VanillaFactionsExpanded.FactionTitle>
+  <VanillaFactionsExpanded.ModInfo>此派系由 [ModName] 添加，目前不存在于您的游戏中。</VanillaFactionsExpanded.ModInfo>
+  <VanillaFactionsExpanded.AnUnknownMod>一个未知Mod</VanillaFactionsExpanded.AnUnknownMod>
+  <VanillaFactionsExpanded.HiddenFactionInfo>这是一个隐藏的派系，不会出现在你的派系列表中。</VanillaFactionsExpanded.HiddenFactionInfo>
+  <VanillaFactionsExpanded.RequiredFactionInfo>其按{ModName}的设定标记。</VanillaFactionsExpanded.RequiredFactionInfo>
+  <VanillaFactionsExpanded.NonSpawningFactionInfo>这个派系被标记为不生成， 你也许应该忽略它。</VanillaFactionsExpanded.NonSpawningFactionInfo>
+  <VanillaFactionsExpanded.FactionSelectOption>请继续选择：</VanillaFactionsExpanded.FactionSelectOption>
+  <VanillaFactionsExpanded.FactionButtonAdd>生成派系</VanillaFactionsExpanded.FactionButtonAdd>
+  <VanillaFactionsExpanded.FactionButtonAddFull>生成具有定居点的派系</VanillaFactionsExpanded.FactionButtonAddFull>
+  <VanillaFactionsExpanded.FactionButtonSkip>忽略</VanillaFactionsExpanded.FactionButtonSkip>
+  <VanillaFactionsExpanded.FactionButtonIgnore>不再生成这个派系</VanillaFactionsExpanded.FactionButtonIgnore>
+  <VanillaFactionsExpanded.FactionMessageFailed>无法生成派系。</VanillaFactionsExpanded.FactionMessageFailed>
+  <VanillaFactionsExpanded.FactionMessageFailedFull>无法生成具有定居点的派系。</VanillaFactionsExpanded.FactionMessageFailedFull>
+  <VanillaFactionsExpanded.FactionMessageSuccessFull>已生成有{Amount}个定居点的{FactionName}。</VanillaFactionsExpanded.FactionMessageSuccessFull>
+  <VanillaFactionsExpanded.FactionMessageSuccess>已生成{FactionName}。</VanillaFactionsExpanded.FactionMessageSuccess>
+  <VanillaFactionsExpanded.FactionSettlementsToSpawn>生成的定居点数：{1}（建议值：{0}）</VanillaFactionsExpanded.FactionSettlementsToSpawn>
+  <VanillaFactionsExpanded.FactionMinDistance>与玩家基地的最短距离：{1}（建议值：{0}）</VanillaFactionsExpanded.FactionMinDistance>
+  <VanillaFactionsExpanded.FactionButtonSpawn>生成</VanillaFactionsExpanded.FactionButtonSpawn>
+  <VanillaFactionsExpanded.FactionButtonCancel>撤销</VanillaFactionsExpanded.FactionButtonCancel>
+  <VSE.Reinforcements>增援</VSE.Reinforcements>
+  <VSE.ReinforcementsDesc>看到你们的部队遭受损失，{FACTION_name}决定增援他们的袭击部队。</VSE.ReinforcementsDesc>
+  <VSE.CostGoodwill>花费: {0}友好度</VSE.CostGoodwill>
+  <VWEL_ToggleHotshotLabel>武器预热</VWEL_ToggleHotshotLabel>
+  <VWEL_ToggleHotshotDesc>站立不动时射击可以给武器预热，从而提高射击速度。 过热会导致爆炸。</VWEL_ToggleHotshotDesc>
+</LanguageData>

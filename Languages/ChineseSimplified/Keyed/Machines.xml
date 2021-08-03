@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <VFEMechForceRecharge>强制充电</VFEMechForceRecharge>
+  <VFEMechForceRechargeDesc>命令关联机器返回此平台充电，无论其当前电池电量如何。</VFEMechForceRechargeDesc>
+  <VFEMechAttachTurret>安装炮塔</VFEMechAttachTurret>
+  <VFEMechAttachTurretDesc>在这个移动平台上安装一个炮塔。 这将需要殖民者提供与该炮塔正常建造成本相等的资源。</VFEMechAttachTurretDesc>
+  <VFEMechMachineDied>机器毁坏</VFEMechMachineDied>
+  <VFEMechMachineDiedDesc>你的一台机器被摧毁了！你可以在加工台上拆除其残骸。为了制作替代品，需要你的一位殖民者将以下部件运送到其平台：\n\n{0}</VFEMechMachineDiedDesc>
+  <VFEMechNoResources>资源不足</VFEMechNoResources>
+  <VFEMechNoTurret>没有活动的移动炮塔</VFEMechNoTurret>
+  <VFEMechReconstruct>需要重制机器：</VFEMechReconstruct>
+  <VFEMechTurretResources>建造炮塔需要：</VFEMechTurretResources>
+  <VFEMechLowerRange>缩小范围</VFEMechLowerRange>
+  <VFEMechLowerRangeDesc>减少这台机器可行驶的地图格数量。</VFEMechLowerRangeDesc>
+  <VFEMechRaiseRange>增大范围</VFEMechRaiseRange>
+  <VFEMechRaiseRangeDesc>增大这台机器可行驶的地图格数量。</VFEMechRaiseRangeDesc>
+  <VFEMechStopMachine>停止机器</VFEMechStopMachine>
+  <VFEMechStopMachineDesc>停止这台机器的运行并强制其返回基地。</VFEMechStopMachineDesc>
+  <VFEMechStartMachine>开启机器</VFEMechStartMachine>
+  <VFEMechStartMachineDesc>开启这台机器</VFEMechStartMachineDesc>
+  <VFEMechMachineHitObstacle>机器遇到障碍物！</VFEMechMachineHitObstacle>
+  <VFEMechSetArea>设置区域</VFEMechSetArea>
+  <VFEMechSetAreaDesc>为该平台的所有关联机器设置允许的区域。</VFEMechSetAreaDesc>
+</LanguageData>

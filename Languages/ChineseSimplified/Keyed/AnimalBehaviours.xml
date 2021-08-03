@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <NocturnalAnimals.BodyClock>生物钟</NocturnalAnimals.BodyClock>
+  <NocturnalAnimals.BodyClock_Description>决定动物什么时候睡觉和什么时候清醒。\n\n昼行性动物晚上睡觉，白天清醒；而夜行性动物白天睡觉，晚上清醒。 黄昏动物主要在黄昏时活跃。</NocturnalAnimals.BodyClock_Description>
+  <NocturnalAnimals.BodyClock_Diurnal>昼夜</NocturnalAnimals.BodyClock_Diurnal>
+  <NocturnalAnimals.BodyClock_Nocturnal>夜</NocturnalAnimals.BodyClock_Nocturnal>
+  <NocturnalAnimals.BodyClock_Crepuscular>黄昏</NocturnalAnimals.BodyClock_Crepuscular>
+  <VEF_AsexualHatched>{0}已无性繁殖。</VEF_AsexualHatched>
+  <VEF_AsexualCloning>{0}已克隆自身。</VEF_AsexualCloning>
+  <VEF_AsexualHatchedEgg>{0}已产出孢子。</VEF_AsexualHatchedEgg>
+  <VEF_NotTameable>这个动物不能被驯服</VEF_NotTameable>
+  <VEF_TimeToMetamorphosis>变形时间：{0}</VEF_TimeToMetamorphosis>
+  <VEF_WarningEggExplodes>警告，这个蛋孵化时会爆炸！</VEF_WarningEggExplodes>
+  <VEF_TimeToDie>动物剩余寿命：{0}</VEF_TimeToDie>
+  <VEF_DisableAnimal>禁用{0}</VEF_DisableAnimal>
+  <VCE_AffectsAllAnimalMods>这些动物行为选项将影响所有使用原版扩展框架的动物Mod</VCE_AffectsAllAnimalMods>
+  <VCE_CorpseDecayingEffectOption>允许动物腐烂机制</VCE_CorpseDecayingEffectOption>
+  <VCE_DigWhenHungryOption>允许饥饿时掘坟机制</VCE_DigWhenHungryOption>
+  <VCE_DigPeriodicallyOption>允许动物定期挖掘物品</VCE_DigPeriodicallyOption>
+  <VCE_AnimalParticlesOption>允许动物污物</VCE_AnimalParticlesOption>
+  <VCE_AsexualReproductionOption>允许无性繁殖</VCE_AsexualReproductionOption>
+  <VFE_AsexualReproductionDisabled>通过Mod选项禁用无性繁殖</VFE_AsexualReproductionDisabled>
+  <VCE_BlinkMechanicsOption>允许“闪烁”机制</VCE_BlinkMechanicsOption>
+  <VCE_BuildPeriodicallyOption>允许动物建造物品（例如海狸建水坝）</VCE_BuildPeriodicallyOption>
+  <VCE_ChargeBatteriesOption>允许动物为附近的电池充电或加油</VCE_ChargeBatteriesOption>
+  <VCE_ExplodingEggsOption>允许动物的蛋爆炸</VCE_ExplodingEggsOption>
+  <VCE_HoveringOption>允许动物“悬浮”以忽略地形干扰</VCE_HoveringOption>
+  <VCE_GraphicChangingOption>允许动物改变外貌（例如变色龙）</VCE_GraphicChangingOption>
+  <VCE_EffecterOption>允许动物使用健康状态、心里状态、想法等机制</VCE_EffecterOption>
+  <VCE_RegenerationOption>允许断肢再生（主动或被动）</VCE_RegenerationOption>
+  <VCE_ResurrectionOption>允许动物自动复活（例如凤凰）</VCE_ResurrectionOption>
+  <VCE_UntameableOption>允许设定动物无法被驯服</VCE_UntameableOption>
+</LanguageData>

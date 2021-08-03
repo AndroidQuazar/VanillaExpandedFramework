@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <VFE_ChunkToMine>挖掘{0}</VFE_ChunkToMine>
+  <VFE_ChunkRandomMine>挖掘随机石块</VFE_ChunkRandomMine>
+  <VFE_ChooseMine>选择要挖掘的石块种类</VFE_ChooseMine>
+  <VFE_ChooseMineDesc>选择要挖掘的石块种类。你可以选择该地图存在的任意一种石块种类经行挖掘，或者随机挖掘。</VFE_ChooseMineDesc>
+  <VFE_RandomRock>随机石块</VFE_RandomRock>
+  <VFE_PleaseSelectOutput>选择机械装置产出</VFE_PleaseSelectOutput>
+  <VFE_NeedsWater>这个建筑必须放置在水上。</VFE_NeedsWater>
+  <VFE_ChangeGraphic>更改图形</VFE_ChangeGraphic>
+  <VFE_ChangeGraphicDesc>在可用的图形之间随机选取此建筑物的图形</VFE_ChangeGraphicDesc>
+  <VFE_RandomOrSequentially>“更改图形”选项随机更改图形（取消选择顺序）</VFE_RandomOrSequentially>
+  <VFE_HideRandomizeButton>隐藏“更改图形”选项</VFE_HideRandomizeButton>
+  <VFE.SwitchLightColor>切换灯光颜色</VFE.SwitchLightColor>
+  <VFE.SwitchLightColorDesc>改变当前灯光颜色</VFE.SwitchLightColorDesc>
+  <VFE.ChangeColorTo>改变颜色为{0}</VFE.ChangeColorTo>
+  <VFE.ColorSwitchPowerOff>电源已关闭。无法切换颜色。</VFE.ColorSwitchPowerOff>
+</LanguageData>

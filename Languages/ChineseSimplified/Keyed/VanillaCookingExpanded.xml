@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <VCE_AllowConditions>开启食物可能导致慢性健康疾病机制（糖尿病、胆固醇和高血压）</VCE_AllowConditions>
+  <VCE_MustBeInstalled>必须安装原版烹饪扩展（Vanilla Cooking Expanded）才能使这些机制生效。</VCE_MustBeInstalled>
+</LanguageData>

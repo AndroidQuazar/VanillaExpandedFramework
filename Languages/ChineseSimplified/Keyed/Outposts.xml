@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <Outposts.Settings.Title>原版扩展框架-哨所</Outposts.Settings.Title>
+  <Outposts.Settings.Multiplier>哨所生成乘数：</Outposts.Settings.Multiplier>
+  <Outposts.Dialog.Create>创建</Outposts.Dialog.Create>
+  <Outposts.Commands.Create.Label>创建哨所</Outposts.Commands.Create.Label>
+  <Outposts.Commands.Create.Desc>让此远行队创建哨所</Outposts.Commands.Create.Desc>
+  <Outposts.Letters.Lost.Label>哨所失守</Outposts.Letters.Lost.Label>
+  <Outposts.Letters.Lost.Text>遗憾的是，由于所有居民的死亡，我们失去了{0}哨所。</Outposts.Letters.Lost.Text>
+  <Outposts.Letters.BattleWon.Label>哨所战胜利</Outposts.Letters.BattleWon.Label>
+  <Outposts.Letters.BattleWon.Text>我们已经成功赢得了在{0}的战斗。</Outposts.Letters.BattleWon.Text>
+  <Outposts.Letters.Items.Label>来自{0}的物品</Outposts.Letters.Items.Label>
+  <Outposts.Letters.Items.Text>你从哨所{0}收到以下物品：</Outposts.Letters.Items.Text>
+  <Outposts.Commands.AddPawn.Label>增援</Outposts.Commands.AddPawn.Label>
+  <Outposts.Commands.AddPawn.Desc>将人员从远行队转移到哨所</Outposts.Commands.AddPawn.Desc>
+  <Outposts.Commands.Pack.Label>打包</Outposts.Commands.Pack.Label>
+  <Outposts.Commands.Pack.Desc>开始将哨所收拾打包成远行队</Outposts.Commands.Pack.Desc>
+  <Outposts.Commands.Remove.Label>撤人</Outposts.Commands.Remove.Label>
+  <Outposts.Commands.Remove.Desc>将此哨所的一个人转移到新的远行队</Outposts.Commands.Remove.Desc>
+  <Outposts.Command.Remove.Only1>不能撤人：只剩1人。如果要放弃此哨所，请选择“打包”。</Outposts.Command.Remove.Only1>
+  <Outposts.Contains>包括{0}人</Outposts.Contains>
+  <Outposts.Packing>打包进远行队。在{0}内完成</Outposts.Packing>
+  <Outposts.NotSkilledEnough>此人技能等级不足，需要{0}技能至少为{1}</Outposts.NotSkilledEnough>
+  <Outposts.RestingAt>在哨所{0}休整</Outposts.RestingAt>
+</LanguageData>
