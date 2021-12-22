@@ -15,6 +15,11 @@ namespace VFECore
 
         public static void TryModifyThingsVerbs(ThingWithComps thing)
         {
+            if (thing == null)
+            {
+                return;
+            }
+
             DrawStatsReport_Patch.interruptWork = true;
             if (thing is Pawn pawn2)
             {
