@@ -53,8 +53,6 @@ namespace Outposts
                         else
                         {
                             caravan.AddPawnOrItem(thing.SplitOff(transferable.CountToTransfer), true);
-                            outpost.TakeItem(thing);
-                         	outpost.AddItem(thing.SplitOff(transferable.CountToTransfer));
                             transferable.AdjustTo(0);
                             transferable.things.Add(thing);
                         }
