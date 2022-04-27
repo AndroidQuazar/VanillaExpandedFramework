@@ -47,8 +47,8 @@ namespace Outposts
                         if (thing.stackCount <= transferable.CountToTransfer)
                         {
                             transferable.AdjustBy(-thing.stackCount);
-                            caravan.AddPawnOrItem(thing, true);
-                            outpost.TakeItem(thing);
+                            thing.holdingOwner?.Remove(thing);
+                            caravan.AddPawnOrItem(outpost.TakeItem(thing), true);
                         }
                         else
                         {
