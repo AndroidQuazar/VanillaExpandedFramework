@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -48,10 +48,13 @@ namespace Outposts
                         {
                             transferable.AdjustBy(-thing.stackCount);
                             caravan.AddPawnOrItem(thing, true);
+                            outpost.TakeItem(thing);
                         }
                         else
                         {
                             caravan.AddPawnOrItem(thing.SplitOff(transferable.CountToTransfer), true);
+                            outpost.TakeItem(thing);
+                         	outpost.AddItem(thing.SplitOff(transferable.CountToTransfer));
                             transferable.AdjustTo(0);
                             transferable.things.Add(thing);
                         }
