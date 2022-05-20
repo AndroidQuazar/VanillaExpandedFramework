@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using KCSG;
 using RimWorld;
 using Verse;
@@ -36,19 +37,22 @@ namespace Outposts
                 alsoRemoveWorldObject = true;
                 return true;
             }
-
-            if (!Map.mapPawns.AllPawns.Where(p => p.RaceProps.Humanlike).Any(p => p.HostileTo(Faction.OfPlayer)))
+            List<Pawn> pawns = Map.mapPawns.AllPawns.ToList();
+            if (!pawns.Any(p => p.HostileTo(Faction.OfPlayer) && p.RaceProps.Humanlike))
             {
                 occupants.Clear();
                 Find.LetterStack.ReceiveLetter("Outposts.Letters.BattleWon.Label".Translate(), "Outposts.Letters.BattleWon.Text".Translate(Name),
                     LetterDefOf.PositiveEvent,
                     new LookTargets(Gen.YieldSingle(this)));
-                foreach (var pawn in Map.mapPawns.AllPawns.Where(p => p.Faction is {IsPlayer: true} || p.HostFaction is {IsPlayer: true}).ToList())
+                for (int i = 0; i < pawns.Count; i++)
                 {
-                    pawn.DeSpawn();
-                    occupants.Add(pawn);
+                    Pawn pawn = pawns[i];
+                    if (pawn.Faction is { IsPlayer: true } || pawn.HostFaction is { IsPlayer: true })
+                    {
+                        pawn.DeSpawn();
+                        occupants.Add(pawn);
+                    }
                 }
-
                 RecachePawnTraits();
                 alsoRemoveWorldObject = false;
                 return true;
