@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine;
 using RimWorld;
 using Verse;
 
@@ -17,8 +18,11 @@ namespace Outposts
             LongEventHandler.QueueLongEvent(() =>
             {
                 parms.target = GetOrGenerateMapUtility.GetOrGenerateMap(target.Tile, new IntVec3(150, 1, 150), target.def);
-                parms.points = StorytellerUtility.DefaultThreatPointsNow(parms.target);
+                target.Debug(parms,.35f,.35f);
+                parms.points = target.ResolveRaidPoints(parms);
                 TryGenerateRaidInfo(parms, out var pawns);
+                target.raidFaction = parms.faction;
+                target.raidPoints = parms.points;
                 TaggedString baseLetterLabel = GetLetterLabel(parms);
                 TaggedString baseLetterText = GetLetterText(parms, pawns);
                 PawnRelationUtility.Notify_PawnsSeenByPlayer_Letter(pawns, ref baseLetterLabel, ref baseLetterText, GetRelatedPawnsInfoLetterText(parms), true);
@@ -44,5 +48,67 @@ namespace Outposts
 
             return result;
         }
+        //Below is me working out what I wanted to do for points. Leaving for a commit in case its at all helpful
+        //These are from QuestNode_Root_Mission_AncientComplex because I know that does a raid under similar parameters.        
+        //It works on DefaultThreatPointsNow (X), Colony Wealth Total (Y), Pawns (Z)
+        //Then * the number by the random range
+        //(b(x) * c(y) * d(z)) * A
+        //Whats done in that quest is going to be way too tough for outposts. Going to use a combination of what Hack_AncientComplex and that one
+        //Time Detection raids does flat local wealth *2.5 but those raids also feel pointless so I want it harder then that. Since local wealth is always really low
+        //Doing (b(x) * d(z))* A
+        //A is reduced heavily compared to quest
+        //This will be something I can only get a real feel for once I play with it
+     /*   private static readonly FloatRange RandomRaidPointsFactorRange = new FloatRange(0.15f, 0.25f);//A
+
+        protected static readonly SimpleCurve ThreatPointsOverPointsCurve = new SimpleCurve//B
+        {
+            {
+                new CurvePoint(35f, 38.5f),
+                true
+            },
+            {
+                new CurvePoint(400f, 165f),
+                true
+            },
+            {
+                new CurvePoint(10000f, 4125f),
+                true
+            }
+        };
+        private static SimpleCurve ThreatPointsFactorOverPawnCountCurve = new SimpleCurve//D
+        {
+            {
+                new CurvePoint(1f, 0.5f),
+                true
+            },
+            {
+                new CurvePoint(2f, 0.55f),
+                true
+            },
+            {
+                new CurvePoint(5f, 0.75f),
+                true
+            },
+            {
+                new CurvePoint(20f, 2f),
+                true
+            }
+        };
+        private static SimpleCurve ThreatPointsFactorOverColonyWealthCurve = new SimpleCurve//C
+        {
+            {
+                new CurvePoint(10000f, 0.5f),
+                true
+            },
+            {
+                new CurvePoint(100000f, 1f),
+                true
+            },
+            {
+                new CurvePoint(1000000f, 1.5f),
+                true
+            }
+        };*/
+
     }
 }

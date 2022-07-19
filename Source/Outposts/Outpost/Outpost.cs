@@ -35,6 +35,9 @@ namespace Outposts
         public IEnumerable<Thing> Things => containedItems;
         public IEnumerable<Pawn> CapablePawns => AllPawns.Where(IsCapable);
 
+        public float raidPoints;
+        public Faction raidFaction;
+
         public override Material Material
         {
             get
@@ -86,6 +89,8 @@ namespace Outposts
             Scribe_Collections.Look(ref containedItems, "containedItems", LookMode.Deep);
             Scribe_Values.Look(ref costPaid, "costPaid");
             Scribe_Values.Look(ref ticksTillPacked, "ticksTillPacked");
+            Scribe_References.Look(ref raidFaction, "raidFaction");
+            Scribe_Values.Look(ref raidPoints, "raidPoints");
             RecachePawnTraits();
         }
 
