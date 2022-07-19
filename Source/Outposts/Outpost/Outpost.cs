@@ -177,9 +177,15 @@ namespace Outposts
             {
                 foreach (var item in CaravanInventoryUtility.AllInventoryItems(caravan)
                     .Where(item => CaravanInventoryUtility.GetOwnerOf(caravan, item) == pawn))
-                    CaravanInventoryUtility.MoveInventoryToSomeoneElse(pawn, item, caravan.PawnsListForReading, new List<Pawn> {pawn}, item.stackCount);
+                {
+                    CaravanInventoryUtility.MoveInventoryToSomeoneElse(pawn, item, caravan.PawnsListForReading, new List<Pawn> { pawn }, item.stackCount);
+                }
+                    
                 if (!caravan.PawnsListForReading.Except(pawn).Any(p => p.RaceProps.Humanlike))
+                {
                     containedItems.AddRange(CaravanInventoryUtility.AllInventoryItems(caravan));
+                }
+                    
                 caravan.RemovePawn(pawn);
                 if (!caravan.PawnsListForReading.Any(p => p.RaceProps.Humanlike))
                 {
