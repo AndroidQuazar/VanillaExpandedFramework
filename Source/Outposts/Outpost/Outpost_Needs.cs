@@ -31,20 +31,24 @@ namespace Outposts
             if (pawn.health.HasHediffsNeedingTend())
             {
                 var doctor = AllPawns.Where(p => p.RaceProps.Humanlike && !p.Downed).MaxBy(p => p.skills?.GetSkill(SkillDefOf.Medicine)?.Level ?? -1f);
-                Medicine medicine = null;
-                var potency = 0f;
-                foreach (var thing in containedItems)
-                    if (thing.def.IsMedicine && (pawn.playerSettings is null || pawn.playerSettings.medCare.AllowsMedicine(thing.def)))
-                    {
-                        var statValue = thing.GetStatValue(StatDefOf.MedicalPotency);
-                        if (statValue > potency || medicine == null)
+                if (doctor != null) //Got a looping error after a prisoner died in a raid. 99% sure this is what was null
+                {
+                    Medicine medicine = null;
+                    var potency = 0f;
+                    foreach (var thing in containedItems)
+                        if (thing.def.IsMedicine && (pawn.playerSettings is null || pawn.playerSettings.medCare.AllowsMedicine(thing.def)))
                         {
-                            potency = statValue;
-                            medicine = (Medicine) thing;
+                            var statValue = thing.GetStatValue(StatDefOf.MedicalPotency);
+                            if (statValue > potency || medicine == null)
+                            {
+                                potency = statValue;
+                                medicine = (Medicine)thing;
+                            }
                         }
-                    }
 
-                TendUtility.DoTend(doctor, pawn, medicine);
+                    TendUtility.DoTend(doctor, pawn, medicine);
+                }
+
             }
 
             if (pawn.health.hediffSet is null) return;

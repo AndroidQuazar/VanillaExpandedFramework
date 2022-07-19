@@ -97,6 +97,21 @@ namespace Outposts
             reason = null;
             return true;
         }
+        //Adding this for whatever weird things I cant think about that leave you stuck
+        [DebugAction("Vanilla Outposts Expanded", "Force End Outpost Raid", false, false, allowedGameStates = AllowedGameStates.PlayingOnMap)]
+        public static void ForceEndMap()
+        {
+            Map map = Find.CurrentMap;
+            if (map.Parent is Outpost parent)
+            {
+                parent.MapClearAndReset();
+                Current.Game.DeinitAndRemoveMap(map);
+            }
+            if (map.Parent.def.defName == "VOE_AmbushedRaid") //Just cant easily force end this one the same way.
+            {
+                Messages.Message("Unable to Force End walk colonists out you wont lose them", MessageTypeDefOf.RejectInput, false);
+            }
+        }
 
         public static string CanSpawnOnWithExt(this OutpostExtension ext, int tileIdx, IEnumerable<Pawn> ps)
         {

@@ -11,18 +11,16 @@ namespace Outposts
 {
     public class WorldComponent_OutpostAttacked: WorldComponent
     {
-        //Adapated from Sarg's Raoming Monstosities
-        //If you want to use this I'll wire up settings for this Im just doing for myself right now
-        public bool disable = false;        
+        //Adapated from Sarg's Raoming Monstosities    
         public int tickCounter;
-        public int ticksToNextAssault = 1000 * 15;
+        public int ticksToNextAssault = OutpostsMod.Settings.raidTimeInterval.RandomInRange;
         public WorldComponent_OutpostAttacked(World world) : base(world)
         {
         }
         public override void WorldComponentTick()
         {
             base.WorldComponentTick();
-            if (!disable)
+            if (OutpostsMod.Settings.DoRaids)
             {
                 if (Find.WorldObjects.AllWorldObjects.OfType<Outpost>().Any())
                 {
@@ -34,7 +32,7 @@ namespace Outposts
                             parms.target = this.world;
                             IncidentDef def = Outposts_DefOf.VEF_OutpostAttacked;
                             def.Worker.TryExecute(parms);
-                            ticksToNextAssault = (int)(60000 * Rand.RangeInclusive(10, 30));
+                            ticksToNextAssault = OutpostsMod.Settings.raidTimeInterval.RandomInRange;
                             tickCounter = 0;                            
                         }
                         tickCounter++;

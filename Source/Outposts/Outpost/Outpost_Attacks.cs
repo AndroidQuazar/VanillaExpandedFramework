@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Collections.Generic;
+using System.Text;
 using KCSG;
 using RimWorld;
 using RimWorld.Planet;
@@ -28,31 +29,21 @@ namespace Outposts
 
             foreach (var occupant in occupants) GenPlace.TryPlaceThing(occupant, Map.Center, Map, ThingPlaceMode.Near);
         }
-        public virtual void AddLoot()
+        public virtual void MapClearAndReset()
         {
-            //looking at this if a colonist gets downed and dropped their weapon would they not lose their weapon?
-            //Also can get raider's weapon
-            foreach (Thing thing in Map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon))
+            occupants.Clear();
+            var pawns = Map.mapPawns.AllPawns.ListFullCopy();
+            foreach (var pawn in pawns)
             {
-                if (!containedItems.Contains(thing) && !thing.Position.Fogged(Map)) //In case ancient dangers are possible in these maps
+                if (pawn.Faction is { IsPlayer: true } || pawn.HostFaction is { IsPlayer: true })
                 {
-                    containedItems.Add(thing);
+                    pawn.DeSpawn();
+                    occupants.Add(pawn);
                 }
             }
-            //I wanted loot
-            if (raidFaction.def.raidLootMaker != null)
-            {
-                float raidLootPoints = raidPoints * Find.Storyteller.difficulty.EffectiveRaidLootPointsFactor;
-                float num = raidFaction.def.raidLootValueFromPointsCurve.Evaluate(raidLootPoints);
-                ThingSetMakerParams parms2 = default(ThingSetMakerParams);
-                parms2.totalMarketValueRange = new FloatRange(num, num);
-                parms2.makingFaction = raidFaction;
-                List<Thing> loot = raidFaction.def.raidLootMaker.root.Generate(parms2);
-                foreach (Thing thing in loot)
-                {
-                    AddItem(thing);
-                }
-            }
+            RecachePawnTraits();
+            raidFaction = null;
+            raidPoints = 0;
         }
         public override bool ShouldRemoveMapNow(out bool alsoRemoveWorldObject)
         {
@@ -69,9 +60,7 @@ namespace Outposts
             if (!pawns.Any(p => p.Faction == raidFaction && !p.Downed)) //Tweak so that random ancients that spawn dont prevent it. (I suspect this is also why raids dont end sometimes some invisible or fogged enemy)
             {
                 occupants.Clear();
-                Find.LetterStack.ReceiveLetter("Outposts.Letters.BattleWon.Label".Translate(), "Outposts.Letters.BattleWon.Text".Translate(Name),
-                    LetterDefOf.PositiveEvent,
-                    new LookTargets(Gen.YieldSingle(this)));
+
                 foreach (var pawn in pawns)
                 {
                     if (pawn.Faction is { IsPlayer: true } || pawn.HostFaction is { IsPlayer: true })
@@ -79,16 +68,13 @@ namespace Outposts
                         pawn.DeSpawn();
                         occupants.Add(pawn);
                     }
-                    if (pawn.Faction == raidFaction)//Random chance to capture
-                    {
-                        if (Rand.Chance(0.33f))
-                        {
-                            pawn.DeSpawn();
-                            occupants.Add(pawn);
-                        }
-                    }
+
                 }
-                AddLoot();
+                AddLoot(raidFaction,raidPoints,Map,out var loot);
+                Find.LetterStack.ReceiveLetter("Outposts.Letters.BattleWon.Label".Translate(), "Outposts.Letters.BattleWon.Text".Translate(Name, loot),
+                LetterDefOf.PositiveEvent,
+                new LookTargets(Gen.YieldSingle(this)));
+
                 RecachePawnTraits();
                 raidFaction = null;
                 raidPoints = 0;
@@ -98,6 +84,67 @@ namespace Outposts
 
             alsoRemoveWorldObject = false;
             return false;
+        }
+        
+        public virtual void AddLoot(Faction raidFaction,float raidPoints,Map map, out string letter)//made these passed for benefit of ambush
+        {
+            //looking at this if a colonist gets downed and dropped their weapon would they not lose their weapon?
+            //Also can get raider's weapon
+            letter = null;
+            StringBuilder sb = new StringBuilder();
+            float mv = 0f;
+            foreach (Thing thing in map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon))
+            {
+                if (!containedItems.Contains(thing) && !thing.Position.Fogged(map)) //In case ancient dangers are possible in these maps
+                {
+                    mv += thing.MarketValue;
+                    containedItems.Add(thing);
+                }
+            }
+            //Rescue colonist corpses. Cant let those funeral opportunities go to waste
+            foreach (Corpse corpse in map.listerThings.ThingsInGroup(ThingRequestGroup.Corpse))
+            {
+                if (corpse.InnerPawn?.Faction?.IsPlayer ?? false)
+                {
+                    sb.AppendLine("Outposts.Letters.BattleWon.Rescued".Translate(corpse.InnerPawn.NameFullColored));
+                    containedItems.Add(corpse);
+                    continue;
+                }
+            }
+            foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == raidFaction && x.Downed).ToList())
+            {
+                if (Rand.Chance(0.33f))
+                {
+                    sb.AppendLine("Outposts.Letters.BattleWon.Captured".Translate(pawn.NameFullColored));
+                    pawn.guest.CapturedBy(Faction);
+                    pawn.DeSpawn();
+                    AddPawn(pawn);
+                }
+            }
+            //I wanted loot
+            if (raidFaction.def.raidLootMaker != null)
+            {
+                float raidLootPoints = raidPoints * Find.Storyteller.difficulty.EffectiveRaidLootPointsFactor;
+                float num = raidFaction.def.raidLootValueFromPointsCurve.Evaluate(raidLootPoints);
+                ThingSetMakerParams parms2 = default(ThingSetMakerParams);
+                parms2.totalMarketValueRange = new FloatRange(num, num);
+                parms2.makingFaction = raidFaction;
+                List<Thing> loot = raidFaction.def.raidLootMaker.root.Generate(parms2);
+                
+                foreach (Thing thing in loot)
+                {
+                    mv += thing.MarketValue;
+                    AddItem(thing);
+                }                
+            }
+            if (mv > 0)
+            {
+                sb.AppendLine("Outposts.Letters.BattleWon.Secured".Translate(mv.ToStringMoney()));
+            }
+            if (sb.Length > 0)
+            {
+                letter = sb.ToString(); 
+            }
         }
     }
 }

@@ -48,6 +48,11 @@ namespace Outposts
 
             return result;
         }
+        protected override void GenerateRaidLoot(IncidentParms parms, float raidLootPoints, List<Pawn> pawns)
+        {
+            //Dont generate loot because we will pass it out later
+            return;
+        }
         //Below is me working out what I wanted to do for points. Leaving for a commit in case its at all helpful
         //These are from QuestNode_Root_Mission_AncientComplex because I know that does a raid under similar parameters.        
         //It works on DefaultThreatPointsNow (X), Colony Wealth Total (Y), Pawns (Z)
@@ -58,57 +63,57 @@ namespace Outposts
         //Doing (b(x) * d(z))* A
         //A is reduced heavily compared to quest
         //This will be something I can only get a real feel for once I play with it
-     /*   private static readonly FloatRange RandomRaidPointsFactorRange = new FloatRange(0.15f, 0.25f);//A
+        /*   private static readonly FloatRange RandomRaidPointsFactorRange = new FloatRange(0.15f, 0.25f);//A
 
-        protected static readonly SimpleCurve ThreatPointsOverPointsCurve = new SimpleCurve//B
-        {
-            {
-                new CurvePoint(35f, 38.5f),
-                true
-            },
-            {
-                new CurvePoint(400f, 165f),
-                true
-            },
-            {
-                new CurvePoint(10000f, 4125f),
-                true
-            }
-        };
-        private static SimpleCurve ThreatPointsFactorOverPawnCountCurve = new SimpleCurve//D
-        {
-            {
-                new CurvePoint(1f, 0.5f),
-                true
-            },
-            {
-                new CurvePoint(2f, 0.55f),
-                true
-            },
-            {
-                new CurvePoint(5f, 0.75f),
-                true
-            },
-            {
-                new CurvePoint(20f, 2f),
-                true
-            }
-        };
-        private static SimpleCurve ThreatPointsFactorOverColonyWealthCurve = new SimpleCurve//C
-        {
-            {
-                new CurvePoint(10000f, 0.5f),
-                true
-            },
-            {
-                new CurvePoint(100000f, 1f),
-                true
-            },
-            {
-                new CurvePoint(1000000f, 1.5f),
-                true
-            }
-        };*/
+           protected static readonly SimpleCurve ThreatPointsOverPointsCurve = new SimpleCurve//B
+           {
+               {
+                   new CurvePoint(35f, 38.5f),
+                   true
+               },
+               {
+                   new CurvePoint(400f, 165f),
+                   true
+               },
+               {
+                   new CurvePoint(10000f, 4125f),
+                   true
+               }
+           };
+           private static SimpleCurve ThreatPointsFactorOverPawnCountCurve = new SimpleCurve//D
+           {
+               {
+                   new CurvePoint(1f, 0.5f),
+                   true
+               },
+               {
+                   new CurvePoint(2f, 0.55f),
+                   true
+               },
+               {
+                   new CurvePoint(5f, 0.75f),
+                   true
+               },
+               {
+                   new CurvePoint(20f, 2f),
+                   true
+               }
+           };
+           private static SimpleCurve ThreatPointsFactorOverColonyWealthCurve = new SimpleCurve//C
+           {
+               {
+                   new CurvePoint(10000f, 0.5f),
+                   true
+               },
+               {
+                   new CurvePoint(100000f, 1f),
+                   true
+               },
+               {
+                   new CurvePoint(1000000f, 1.5f),
+                   true
+               }
+           };*/
 
     }
 }
