@@ -138,7 +138,7 @@ namespace Outposts
                     }
                 }
             //Probably shouldnt be doing this during a raid. Fixed one bug in there, but really it just shouldnt be happening
-            if (Map != null)
+            if (Map == null)
             {
                 SatisfyNeeds();
             }
