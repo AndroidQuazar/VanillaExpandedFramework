@@ -23,7 +23,8 @@ namespace Outposts
             float fighters = AllPawns.Where(x => (x.RaceProps.Humanlike && !x.IsPrisoner )  || x.RaceProps.trainability == TrainabilityDefOf.Advanced).Count();//Humans and fighting animals           
             float points = ThreatPointsOverPointsCurve.Evaluate(parms.points) * ThreatPointsFactorOverPawnCountCurve.Evaluate(fighters)* ThreatPointsFactorOverLocalWealth.Evaluate(parms.target.PlayerWealthForStoryteller);
             points *= pointFactorRange.RandomInRange;
-            points = Mathf.Max(points, mapPoints) * OutpostsMod.Settings.RaidDifficultyMultiplier;
+            Log.Message("PreMultiPoints," + points.ToString() + "," + mapPoints.ToString());
+            points = Mathf.Max(points, mapPoints) * OutpostsMod.Settings.RaidDifficultyMultiplier;            
             return Mathf.Clamp(points, 35f,10000f);//I pitty whoever makes it hit 10k via settings
         }
         //Debug to test impact of colony

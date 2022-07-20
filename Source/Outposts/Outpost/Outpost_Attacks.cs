@@ -27,7 +27,15 @@ namespace Outposts
 
             foreach (var pawn in Map.mapPawns.AllPawns.Where(p => p.RaceProps.Humanlike).ToList()) pawn.Destroy();
 
-            foreach (var occupant in occupants) GenPlace.TryPlaceThing(occupant, Map.Center, Map, ThingPlaceMode.Near);
+            foreach (var occupant in occupants)
+            {
+                GenPlace.TryPlaceThing(occupant, Map.Center, Map, ThingPlaceMode.Near);
+                if (occupant.Position.Fogged(Map))
+                {
+                    FloodFillerFog.FloodUnfog(occupant.Position, Map);
+                }
+            }
+
         }
         public virtual void MapClearAndReset()
         {
@@ -60,7 +68,6 @@ namespace Outposts
             if (!pawns.Any(p => p.Faction == raidFaction && !p.Downed)) //Tweak so that random ancients that spawn dont prevent it. (I suspect this is also why raids dont end sometimes some invisible or fogged enemy)
             {
                 occupants.Clear();
-
                 foreach (var pawn in pawns)
                 {
                     if (pawn.Faction is { IsPlayer: true } || pawn.HostFaction is { IsPlayer: true })
@@ -93,27 +100,29 @@ namespace Outposts
             letter = null;
             StringBuilder sb = new StringBuilder();
             float mv = 0f;
-            foreach (Thing thing in map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon))
+            foreach (Thing thing in map.listerThings.ThingsInGroup(ThingRequestGroup.Weapon).ToList())
             {
                 if (!containedItems.Contains(thing) && !thing.Position.Fogged(map)) //In case ancient dangers are possible in these maps
                 {
                     mv += thing.MarketValue;
+                    thing.DeSpawn();
                     containedItems.Add(thing);
                 }
             }
             //Rescue colonist corpses. Cant let those funeral opportunities go to waste
-            foreach (Corpse corpse in map.listerThings.ThingsInGroup(ThingRequestGroup.Corpse))
+            foreach (Corpse corpse in map.listerThings.ThingsInGroup(ThingRequestGroup.Corpse).ToList())
             {
                 if (corpse.InnerPawn?.Faction?.IsPlayer ?? false)
                 {
                     sb.AppendLine("Outposts.Letters.BattleWon.Rescued".Translate(corpse.InnerPawn.NameFullColored));
+                    corpse.DeSpawn();
                     containedItems.Add(corpse);
                     continue;
                 }
             }
             foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == raidFaction && x.Downed).ToList())
             {
-                if (Rand.Chance(0.33f))
+                if (Rand.Chance(0.33f) && !pawn.Dead)
                 {
                     sb.AppendLine("Outposts.Letters.BattleWon.Captured".Translate(pawn.NameFullColored));
                     pawn.guest.CapturedBy(Faction);

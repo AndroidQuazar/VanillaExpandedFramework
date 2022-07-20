@@ -17,8 +17,7 @@ namespace Outposts
             if (!Find.WorldObjects.AllWorldObjects.OfType<Outpost>().TryRandomElement(out var target)) return false;
             LongEventHandler.QueueLongEvent(() =>
             {
-                parms.target = GetOrGenerateMapUtility.GetOrGenerateMap(target.Tile, new IntVec3(150, 1, 150), target.def);
-                target.Debug(parms,.35f,.35f);
+                parms.target = GetOrGenerateMapUtility.GetOrGenerateMap(target.Tile, new IntVec3(150, 1, 150), target.def);               
                 parms.points = target.ResolveRaidPoints(parms);
                 TryGenerateRaidInfo(parms, out var pawns);
                 target.raidFaction = parms.faction;

@@ -10,6 +10,8 @@
     <Outposts.Commands.Create.Desc>Create a new outpost using this caravan</Outposts.Commands.Create.Desc>
     <Outposts.Commands.TakeItems.Label>Take items</Outposts.Commands.TakeItems.Label>
     <Outposts.Commands.TakeItems.Desc>Take items from {0} and add them to the caravan</Outposts.Commands.TakeItems.Desc>
+	<Outposts.Commands.GiveItems.Label>Give items</Outposts.Commands.GiveItems.Label>
+    <Outposts.Commands.GiveItems.Desc>Take items from {0} and add them to the outpost</Outposts.Commands.GiveItems.Desc>
     <Outposts.Letters.Lost.Label>Outpost Lost</Outposts.Letters.Lost.Label>
     <Outposts.Letters.Lost.Text>Regretfully, due to the deaths of all inhabitants, the outpost of {0} has been lost to us.</Outposts.Letters.Lost.Text>
     <Outposts.Letters.BattleWon.Label>Outpost Battle Won</Outposts.Letters.BattleWon.Label>
@@ -53,6 +55,7 @@
     <Outposts.Abandoned>Outpost Abandoned</Outposts.Abandoned>
     <Outposts.Abandoned.Desc>{0} has been abonded due to having no one inside to run it. It will very quickly be looted and taken over by nature, leaving no trace it was ever there.</Outposts.Abandoned.Desc>
     <Outposts.Take>Take</Outposts.Take>
+	<Outposts.Give>Give</Outposts.Give>
     <Outposts.AllowedBiomes>Must be in one of the following biomes:</Outposts.AllowedBiomes>
     <Outposts.DisallowedBiomes>Cannot be in any of the following biomes:</Outposts.DisallowedBiomes>
     <Outposts.NumPawns>Must have at least {0} pawns willing to join the outpost</Outposts.NumPawns>

@@ -178,16 +178,22 @@ namespace Outposts
             if (!Ext.CanAddPawn(pawn, out _)) return false;
             var caravan = pawn.GetCaravan();
             if (caravan != null)
-            {
+            {                        
                 foreach (var item in CaravanInventoryUtility.AllInventoryItems(caravan)
                     .Where(item => CaravanInventoryUtility.GetOwnerOf(caravan, item) == pawn))
                 {
-                    CaravanInventoryUtility.MoveInventoryToSomeoneElse(pawn, item, caravan.PawnsListForReading, new List<Pawn> { pawn }, item.stackCount);
+                    CaravanInventoryUtility.MoveInventoryToSomeoneElse(pawn, item, caravan.PawnsListForReading, new List<Pawn> { pawn }, item.stackCount);                    
                 }
-                    
+                //Have to empty every pawns inventory items first or they will get added with the things on them. Creating duplicate load IDs/items
+                //Move either fails or moves it to an animal. Neither result work
                 if (!caravan.PawnsListForReading.Except(pawn).Any(p => p.RaceProps.Humanlike))
                 {
-                    containedItems.AddRange(CaravanInventoryUtility.AllInventoryItems(caravan));
+                    foreach (var item in CaravanInventoryUtility.AllInventoryItems(caravan).ToList())
+                    {
+                        Pawn caravanPawn = CaravanInventoryUtility.GetOwnerOf(caravan, item);
+                        containedItems.Add(item);
+                        caravanPawn.inventory.innerContainer.Remove(item);
+                    }
                 }
                     
                 caravan.RemovePawn(pawn);
@@ -264,6 +270,12 @@ namespace Outposts
                 action = () => Find.WindowStack.Add(new Dialog_TakeItems(this, caravan)),
                 defaultLabel = "Outposts.Commands.TakeItems.Label".Translate(),
                 defaultDesc = "Outposts.Commands.TakeItems.Desc".Translate(Name),
+                icon = TexOutposts.RemoveItemsTex
+            }).Append(new Command_Action
+            {
+                action = () => Find.WindowStack.Add(new Dialog_GiveItems(this, caravan)),
+                defaultLabel = "Outposts.Commands.GiveItems.Label".Translate(),
+                defaultDesc = "Outposts.Commands.GiveItems.Desc".Translate(caravan.Name),
                 icon = TexOutposts.RemoveItemsTex
             });
         }

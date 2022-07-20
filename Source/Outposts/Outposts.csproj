@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dialogs\Dialog_CreateCamp.cs" />
+    <Compile Include="Dialogs\Dialog_GiveItems.cs" />
     <Compile Include="Dialogs\Dialog_TakeItems.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="IncidentWorker_OutpostAttacked.cs" />
