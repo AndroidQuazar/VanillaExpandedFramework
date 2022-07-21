@@ -125,10 +125,13 @@ namespace Outposts
             if (Find.WorldObjects.PlayerControlledCaravanAt(Tile) is { } caravan && !caravan.pather.MovingNow)
                 foreach (var pawn in caravan.PawnsListForReading)
                 {
+                    //Adding these as in a mass caravan spam test there was dyrad with no rest need
+                    if(pawn.needs?.rest == null) { continue; }
                     pawn.needs.rest.CurLevel += RestPerTickResting;
                     if (pawn.IsHashIntervalTick(300))
                     {
-                        var food = pawn.needs.food;
+                        var food = pawn.needs?.food;
+                        if(food == null) { continue;}
                         if (food.CurLevelPercentage <= pawn.RaceProps.FoodLevelPercentageWantEat && ProvidedFood is {IsNutritionGivingIngestible: true} &&
                             ProvidedFood.ingestible.HumanEdible)
                         {

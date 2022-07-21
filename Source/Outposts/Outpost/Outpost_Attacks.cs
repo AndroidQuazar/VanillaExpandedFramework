@@ -75,7 +75,6 @@ namespace Outposts
                         pawn.DeSpawn();
                         occupants.Add(pawn);
                     }
-
                 }
                 AddLoot(raidFaction,raidPoints,Map,out var loot);
                 Find.LetterStack.ReceiveLetter("Outposts.Letters.BattleWon.Label".Translate(), "Outposts.Letters.BattleWon.Text".Translate(Name, loot),
@@ -127,6 +126,7 @@ namespace Outposts
                         if (thing.def.IsWeapon)
                         {
                             corpse.InnerPawn.equipment.TryDropEquipment(thing, out var equipment, corpse.Position, false);
+                            mv += equipment.MarketValue;
                             equipment.DeSpawn();
                             containedItems.Add(equipment);
                         }
@@ -151,8 +151,7 @@ namespace Outposts
                 ThingSetMakerParams parms2 = default(ThingSetMakerParams);
                 parms2.totalMarketValueRange = new FloatRange(num, num);
                 parms2.makingFaction = raidFaction;
-                List<Thing> loot = raidFaction.def.raidLootMaker.root.Generate(parms2);
-                
+                List<Thing> loot = raidFaction.def.raidLootMaker.root.Generate(parms2);                
                 foreach (Thing thing in loot)
                 {
                     mv += thing.MarketValue;

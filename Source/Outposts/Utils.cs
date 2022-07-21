@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using HarmonyLib;
 using RimWorld;
 using RimWorld.Planet;
 using UnityEngine;
@@ -25,6 +26,9 @@ namespace Outposts
 
         public static string Line(this string input, bool show = true) => !show || input.NullOrEmpty() ? "" : "\n" + input;
         public static string Line(this TaggedString input, bool show = true) => !show || input.NullOrEmpty() ? "" : "\n" + input.RawText;
+
+        public delegate void ImmunityTick(ImmunityHandler immunity);
+        public static readonly ImmunityTick immunityTick = AccessTools.MethodDelegate<ImmunityTick>(AccessTools.Method(typeof(ImmunityHandler), "ImmunityHandlerTick"));
 
         public static IEnumerable<Thing> Make(this ThingDef thingDef, int count, ThingDef stuff = null)
         {
@@ -93,7 +97,6 @@ namespace Outposts
                 reason = "IdeoligionForbids".Translate();
                 return false;
             }
-
             reason = null;
             return true;
         }
