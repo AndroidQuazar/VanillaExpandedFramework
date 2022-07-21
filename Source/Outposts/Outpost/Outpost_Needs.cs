@@ -14,9 +14,11 @@ namespace Outposts
 
         public virtual void SatisfyNeeds(Pawn pawn)
         {
-            if (pawn is null || pawn.Spawned) return;
+            if (pawn is null || pawn.Spawned ||pawn.Dead) return;
             var food = pawn.needs?.food;
             if (GenLocalDate.HourInteger(Tile) >= 23 || GenLocalDate.HourInteger(Tile) <= 5) pawn.needs?.rest?.TickResting(0.75f);
+            //pawn.health?.HealthTick();
+            pawn.ageTracker?.AgeTick();//Making pawns age
             if (!pawn.IsHashIntervalTick(300)) return;
             if (food is not null && food.CurLevelPercentage <= pawn.RaceProps.FoodLevelPercentageWantEat &&
                 ProvidedFood is {IsNutritionGivingIngestible: true} &&
@@ -35,17 +37,17 @@ namespace Outposts
                 {
                     Medicine medicine = null;
                     var potency = 0f;
-                    foreach (var thing in containedItems)
+                    CheckNoDestroyedOrNoStack();
+                    foreach (var thing in containedItems.ToList())
                         if (thing.def.IsMedicine && (pawn.playerSettings is null || pawn.playerSettings.medCare.AllowsMedicine(thing.def)))
                         {
                             var statValue = thing.GetStatValue(StatDefOf.MedicalPotency);
                             if (statValue > potency || medicine == null)
                             {
                                 potency = statValue;
-                                medicine = (Medicine)thing;
+                                medicine = (Medicine)TakeItem(thing);                                
                             }
                         }
-
                     TendUtility.DoTend(doctor, pawn, medicine);
                 }
 
@@ -78,7 +80,10 @@ namespace Outposts
                     removedAnything = true;
                 }
             }
+            if (pawn.health.hediffSet.hediffs.Any(x => x.def.HasComp(typeof(HediffComp_Disappears))))
+            {
 
+            }
             if (removedAnything) pawn.health.Notify_HediffChanged(null);
         }
     }

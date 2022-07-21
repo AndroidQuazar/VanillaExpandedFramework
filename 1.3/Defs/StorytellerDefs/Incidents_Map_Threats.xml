@@ -24,7 +24,7 @@
     </targetTags>
     <workerClass>Outposts.IncidentWorker_OutpostAttacked</workerClass>
     <baseChance>0</baseChance>
-    <category>ThreatBig</category>
+    <category>VEF_OutpostAttack</category>
     <pointsScaleable>true</pointsScaleable>
     <tale>Raid</tale>
   </IncidentDef>

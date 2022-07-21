@@ -214,7 +214,7 @@ namespace Outposts
         public Dictionary<string, OutpostSettings> SettingsPerOutpost = new();
         public float TimeMultiplier = 1f;
         public float RaidDifficultyMultiplier = 1f;
-        public IntRange raidTimeInterval = new IntRange(GenDate.TicksPerQuadrum/2, GenDate.TicksPerQuadrum*2);
+        public IntRange raidTimeInterval = new IntRange(GenDate.TicksPerQuadrum/2, GenDate.TicksPerQuadrum);
 
 
         public OutpostSettings SettingsFor(string defName)

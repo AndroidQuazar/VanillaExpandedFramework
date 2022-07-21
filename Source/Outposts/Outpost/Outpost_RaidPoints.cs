@@ -16,16 +16,56 @@ namespace Outposts
         //D: FloatRange that reduces further
         //(A*B*C)*D
         public virtual float ResolveRaidPoints(IncidentParms parms,float rangeMin = 0.25f, float rangeMax = 0.35f)        
-        {
-            
+        {            
             FloatRange pointFactorRange = new FloatRange(rangeMin, rangeMax);
-            float mapPoints = StorytellerUtility.DefaultThreatPointsNow(parms.target);//Min points 
-            float fighters = AllPawns.Where(x => (x.RaceProps.Humanlike && !x.IsPrisoner )  || x.RaceProps.trainability == TrainabilityDefOf.Advanced).Count();//Humans and fighting animals           
-            float points = ThreatPointsOverPointsCurve.Evaluate(parms.points) * ThreatPointsFactorOverPawnCountCurve.Evaluate(fighters)* ThreatPointsFactorOverLocalWealth.Evaluate(parms.target.PlayerWealthForStoryteller);
+            float mapPoints = HasMap ? StorytellerUtility.DefaultThreatPointsNow(parms.target) : 35f;//Min points 
+            float fighters = AllPawns.Where(x => (x.RaceProps.Humanlike && !x.IsPrisoner )  || x.training.CanAssignToTrain(TrainableDefOf.Release).Accepted).Count();//Humans and fighting animals           
+            float points = ThreatCurve.Evaluate(parms.points) * PawnCurve.Evaluate(fighters)* WealthCurve.Evaluate(WealthForCurve);
             points *= pointFactorRange.RandomInRange;
             Log.Message("PreMultiPoints," + points.ToString() + "," + mapPoints.ToString());
             points = Mathf.Max(points, mapPoints) * OutpostsMod.Settings.RaidDifficultyMultiplier;            
             return Mathf.Clamp(points, 35f,10000f);//I pitty whoever makes it hit 10k via settings
+        }
+        
+        public virtual float WealthForCurve//using the map PlayerWealth is awkward because it requires the pawns to be spawned
+        {
+            get
+            {
+                float wealth = 0f;
+                foreach (var pawn in AllPawns.Where(x => (x.RaceProps.Humanlike && !x.IsPrisoner) || x.training.CanAssignToTrain(TrainableDefOf.Release).Accepted))
+                {
+                    wealth += WealthWatcher.GetEquipmentApparelAndInventoryWealth(pawn);
+                    float marketValue = pawn.MarketValue;
+                    if (pawn.IsSlave)
+                    {
+                        marketValue *= 0.75f;
+                    }
+                    wealth += marketValue;
+                }
+                return wealth;
+            }
+
+        }
+        public virtual SimpleCurve ThreatCurve
+        {
+            get
+            {
+                return ThreatPointsOverPointsCurve;
+            }
+        }
+        public virtual SimpleCurve PawnCurve
+        {
+            get
+            {
+                return ThreatPointsFactorOverPawnCountCurve;
+            }
+        }
+        public virtual SimpleCurve WealthCurve
+        {
+            get
+            {
+                return ThreatPointsFactorOverLocalWealth;
+            }
         }
         //Debug to test impact of colony
         public void Debug(IncidentParms parms, float rangeMin = 0.25f, float rangeMax = 0.35f)
@@ -37,12 +77,11 @@ namespace Outposts
             {
                 parms.points = 100 * i;
                 float points = ResolveRaidPoints(parms, rangeMin, rangeMax);
-                Log.Message("Colony Points: " + parms.points +","+ points.ToString());       
-                
+                Log.Message("Colony Points: " + parms.points + "," + points.ToString());
             }
             parms.points = origParm;
         }
-        protected static SimpleCurve ThreatPointsOverPointsCurve = new SimpleCurve//A
+        private static SimpleCurve ThreatPointsOverPointsCurve = new SimpleCurve//A
         {
             {
                 new CurvePoint(35f, 38.5f),
@@ -87,7 +126,7 @@ namespace Outposts
                 true
             },
             {
-                new CurvePoint(100000f, 2f),
+                new CurvePoint(100000f, 3f),
                 true
             }
         };

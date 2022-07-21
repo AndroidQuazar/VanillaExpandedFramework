@@ -119,6 +119,19 @@ namespace Outposts
                     containedItems.Add(corpse);
                     continue;
                 }
+                //NonUnoPinata means no weapons trying to safely add compat because i use it XD
+                if (!corpse.InnerPawn?.equipment?.AllEquipmentListForReading.NullOrEmpty() ?? false)
+                {
+                    foreach (var thing in corpse.InnerPawn.equipment.AllEquipmentListForReading.ToList())
+                    {
+                        if (thing.def.IsWeapon)
+                        {
+                            corpse.InnerPawn.equipment.TryDropEquipment(thing, out var equipment, corpse.Position, false);
+                            equipment.DeSpawn();
+                            containedItems.Add(equipment);
+                        }
+                    }
+                }
             }
             foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == raidFaction && x.Downed).ToList())
             {

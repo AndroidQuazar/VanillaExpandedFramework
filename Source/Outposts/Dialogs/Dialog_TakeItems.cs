@@ -17,6 +17,7 @@ namespace Outposts
 
         public Dialog_TakeItems(Outpost outpost, Caravan caravan)
         {
+            outpost.CheckNoDestroyedOrNoStack();
             this.outpost = outpost;
             this.caravan = caravan;
         }

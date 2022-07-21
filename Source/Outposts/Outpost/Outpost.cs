@@ -142,7 +142,8 @@ namespace Outposts
             {
                 SatisfyNeeds();
             }
-            
+
+
         }
 
         public virtual IEnumerable<Thing> ProducedThings()
@@ -195,7 +196,7 @@ namespace Outposts
                         caravanPawn.inventory.innerContainer.Remove(item);
                     }
                 }
-                    
+                pawn.ownership.UnclaimAll();
                 caravan.RemovePawn(pawn);
                 if (!caravan.PawnsListForReading.Any(p => p.RaceProps.Humanlike))
                 {
