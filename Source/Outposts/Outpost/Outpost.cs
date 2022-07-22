@@ -330,7 +330,7 @@ namespace Outposts
                     action = () =>
                     {
                         var menuOptions = new List<FloatMenuOption>();
-                        foreach (var map in Find.Maps.Where(m => m.IsPlayerHome).OrderByDescending(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)))
+                        foreach (var map in Find.Maps.Where(m => m.IsPlayerHome).OrderBy(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)))
                         {                            
                             menuOptions.Add(new FloatMenuOption(map.Parent.LabelCap, () => deliveryMap = map));
                         }
