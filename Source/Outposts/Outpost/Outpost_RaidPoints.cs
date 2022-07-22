@@ -22,7 +22,7 @@ namespace Outposts
             float fighters = AllPawns.Where(x => (x.RaceProps.Humanlike && !x.IsPrisoner )  || x.training.CanAssignToTrain(TrainableDefOf.Release).Accepted).Count();//Humans and fighting animals           
             float points = ThreatCurve.Evaluate(parms.points) * PawnCurve.Evaluate(fighters)* WealthCurve.Evaluate(WealthForCurve);
             points *= pointFactorRange.RandomInRange;
-            Log.Message("PreMultiPoints," + points.ToString() + "," + mapPoints.ToString());
+            //Log.Message("PreMultiPoints," + points.ToString() + "," + mapPoints.ToString());
             points = Mathf.Max(points, mapPoints) * OutpostsMod.Settings.RaidDifficultyMultiplier;            
             return Mathf.Clamp(points, 35f,10000f);//I pitty whoever makes it hit 10k via settings
         }
