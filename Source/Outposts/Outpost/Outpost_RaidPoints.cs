@@ -67,6 +67,8 @@ namespace Outposts
                 return ThreatPointsFactorOverLocalWealth;
             }
         }
+
+
         //Debug to test impact of colony
         public void Debug(IncidentParms parms, float rangeMin = 0.25f, float rangeMax = 0.35f)
         {
@@ -107,7 +109,11 @@ namespace Outposts
                 true
             },
             {
-                new CurvePoint(5f, 0.75f),
+                new CurvePoint(5f, 1f),
+                true
+            },
+            {
+                new CurvePoint(8f, 1.1f),
                 true
             },
             {
@@ -122,11 +128,15 @@ namespace Outposts
                 true
             },
             {
-                new CurvePoint(10000f, 1f),
+                new CurvePoint(24000f, 1f),
                 true
             },
             {
-                new CurvePoint(100000f, 3f),
+                new CurvePoint(50000f, 1.1f),
+                true
+            },
+            {
+                new CurvePoint(250000f, 2f),
                 true
             }
         };
