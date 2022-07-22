@@ -167,7 +167,7 @@ namespace Outposts
             base.SpawnSetup();            
             if (deliveryMap == null)
             {
-                deliveryMap = Find.Maps.Where(m => m.IsPlayerHome).OrderByDescending(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)).FirstOrDefault();
+                deliveryMap = Find.Maps.Where(m => m.IsPlayerHome).OrderBy(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)).FirstOrDefault();
             }
             RecachePawnTraits();
             OutpostsMod.Notify_Spawned(this);
