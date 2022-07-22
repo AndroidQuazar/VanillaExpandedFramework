@@ -63,7 +63,6 @@ namespace Outposts
                 alsoRemoveWorldObject = true;
                 return true;
             }
-
             var pawns = Map.mapPawns.AllPawns.ListFullCopy();
             if (!pawns.Any(p => p.Faction == raidFaction && !p.Downed)) //Tweak so that random ancients that spawn dont prevent it. (I suspect this is also why raids dont end sometimes some invisible or fogged enemy)
             {

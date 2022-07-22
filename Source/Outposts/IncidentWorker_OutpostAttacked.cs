@@ -19,7 +19,6 @@ namespace Outposts
             {
                 parms.target = GetOrGenerateMapUtility.GetOrGenerateMap(target.Tile, new IntVec3(150, 1, 150), target.def);               
                 parms.points = target.ResolveRaidPoints(parms);
-                target.Debug(parms, 0.35f, 0.35f);
                 TryGenerateRaidInfo(parms, out var pawns);
                 target.raidFaction = parms.faction;
                 target.raidPoints = parms.points;
