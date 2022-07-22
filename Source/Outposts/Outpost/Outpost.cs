@@ -26,6 +26,8 @@ namespace Outposts
         public int PawnCount => occupants.Count;
         public override Color ExpandingIconColor => Faction.Color;
 
+        public Map deliveryMap;
+
         public virtual int TicksPerProduction => Ext?.TicksPerProduction ?? 15 * 60000;
         public override bool HasName => !Name.NullOrEmpty();
         public override string Label => Name;
@@ -91,6 +93,7 @@ namespace Outposts
             Scribe_Values.Look(ref ticksTillPacked, "ticksTillPacked");
             Scribe_References.Look(ref raidFaction, "raidFaction");
             Scribe_Values.Look(ref raidPoints, "raidPoints");
+            Scribe_References.Look(ref deliveryMap, "deliveryMap");
             RecachePawnTraits();
         }
 
@@ -161,7 +164,11 @@ namespace Outposts
 
         public override void SpawnSetup()
         {
-            base.SpawnSetup();
+            base.SpawnSetup();            
+            if (deliveryMap == null)
+            {
+                deliveryMap = Find.Maps.Where(m => m.IsPlayerHome).OrderByDescending(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)).FirstOrDefault();
+            }
             RecachePawnTraits();
             OutpostsMod.Notify_Spawned(this);
         }
@@ -316,7 +323,24 @@ namespace Outposts
                 disabled = occupants.Count == 1,
                 disabledReason = "Outposts.Command.Remove.Only1".Translate()
             };
-
+            if (OutpostsMod.Settings.DeliveryMethod != DeliveryMethod.Store && !ResultOptions.NullOrEmpty())
+            {
+                yield return new Command_Action
+                {
+                    action = () =>
+                    {
+                        var menuOptions = new List<FloatMenuOption>();
+                        foreach (var map in Find.Maps.Where(m => m.IsPlayerHome).OrderByDescending(m => Find.WorldGrid.ApproxDistanceInTiles(m.Parent.Tile, Tile)))
+                        {                            
+                            menuOptions.Add(new FloatMenuOption(map.Parent.LabelCap, () => deliveryMap = map));
+                        }
+                        Find.WindowStack.Add(new FloatMenu(menuOptions));
+                    },
+                    defaultLabel = "Outposts.Commands.DeliveryColony.Label".Translate(),
+                    defaultDesc = "Outposts.Commands.DeliveryColony.Desc".Translate(deliveryMap?.Parent.LabelCap),
+                    icon = SettleUtility.SettleCommandTex
+                };
+            }
             if (Prefs.DevMode)
             {
                 yield return new Command_Action

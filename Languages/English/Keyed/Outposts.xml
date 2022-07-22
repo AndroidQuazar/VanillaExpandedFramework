@@ -23,6 +23,8 @@
     <Outposts.Letters.Items.Text>You have received the follow items from the outpost {0}:</Outposts.Letters.Items.Text>
     <Outposts.Commands.AddPawn.Label>Add Pawn</Outposts.Commands.AddPawn.Label>
     <Outposts.Commands.AddPawn.Desc>Transfer a pawn from this caravan to the outpost</Outposts.Commands.AddPawn.Desc>
+	<Outposts.Commands.DeliveryColony.Label>Delivery Destination</Outposts.Commands.DeliveryColony.Label>
+    <Outposts.Commands.DeliveryColony.Desc>Select which colony will recieve the goods. Currently: {0}</Outposts.Commands.DeliveryColony.Desc>
     <Outposts.Commands.Pack.Label>Pack</Outposts.Commands.Pack.Label>
     <Outposts.Commands.Pack.Desc>Begin packing this outpost back into a caravan</Outposts.Commands.Pack.Desc>
     <Outposts.Commands.StopPack.Label>Stop packing</Outposts.Commands.StopPack.Label>
