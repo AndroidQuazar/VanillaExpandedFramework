@@ -69,7 +69,28 @@ namespace Outposts
             containedItems.Remove(t);
             return t;
         }
-
+        public List<Thing> TakeItems(ThingDef thingDef, int stackCount)
+        {
+            var items = new List<Thing>();
+            foreach (var item in containedItems)
+            {
+                if (item.def == thingDef)
+                {
+                    if (stackCount < item.stackCount)
+                    {
+                        items.Add(item.SplitOff(stackCount));
+                        stackCount = 0;                        
+                    }
+                    else
+                    {
+                        stackCount = -item.stackCount;
+                        items.Add(TakeItem(item));
+                    }
+                }
+                if(stackCount == 0) { break; }
+            }
+            return items;
+        }
         public override void PostAdd()
         {
             base.PostAdd();

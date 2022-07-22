@@ -134,7 +134,7 @@ namespace Outposts
             }
             foreach (Pawn pawn in map.mapPawns.AllPawnsSpawned.Where(x => x.Faction == raidFaction && x.Downed).ToList())
             {
-                if (Rand.Chance(0.33f) && !pawn.Dead)
+                if (Rand.Chance(0.33f) && !pawn.Dead && pawn.RaceProps.Humanlike)
                 {
                     sb.AppendLine("Outposts.Letters.BattleWon.Captured".Translate(pawn.NameFullColored));
                     pawn.guest.CapturedBy(Faction);

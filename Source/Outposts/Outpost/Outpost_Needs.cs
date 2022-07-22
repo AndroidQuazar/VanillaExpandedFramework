@@ -21,7 +21,12 @@ namespace Outposts
             pawn.ageTracker?.AgeTick();//Making pawns age
             //Seperated out Health
             OutpostHealthTick(pawn);
-            
+            if (pawn.Dead)
+            {
+                occupants.Remove(pawn);
+                containedItems.Add(pawn.Corpse);
+                return;
+            }
             if (!pawn.IsHashIntervalTick(300)) return;
             var food = pawn.needs?.food;
             if (food is not null && food.CurLevelPercentage <= pawn.RaceProps.FoodLevelPercentageWantEat &&
