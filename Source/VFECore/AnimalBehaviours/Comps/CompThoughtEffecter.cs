@@ -57,7 +57,7 @@ namespace AnimalBehaviours
                                         //Apply thought
                                         pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named(Props.thoughtDef), null);
                                     }
-                                    else
+                                    else if(pawn.needs.mood != null)
                                     {
                                         bool wellbeingAffectedFlag = thisPawn.needs.food.Starving || (thisPawn.health.hediffSet.PainTotal > 0);
                                         if (wellbeingAffectedFlag)
@@ -67,7 +67,6 @@ namespace AnimalBehaviours
                                         }
                                         else
                                         {
-
                                             pawn.needs.mood.thoughts.memories.TryGainMemory(ThoughtDef.Named(Props.thoughtDef), null);
                                         }
                                     }
